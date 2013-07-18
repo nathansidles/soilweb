@@ -44,11 +44,11 @@
         if(isset($_REQUEST['site_name']) && $_REQUEST['site_name'] != '')
             $mapsQuery .= "&site_name=" . urlencode($_REQUEST['site_name']) . "";
         if(isset($_REQUEST['data_source']) && $_REQUEST['data_source'] != '')
-            $mapsQuery .= "&vsslr_tool=" . urlencode($_REQUEST['data_source']) . "";
+            $mapsQuery .= "&data_source=" . urlencode($_REQUEST['data_source']) . "";
         if(isset($_REQUEST['expert']) && $_REQUEST['expert'] != '')
-            $mapsQuery .= "&featured_expert=" . urlencode($_REQUEST['expert']) . "";
+            $mapsQuery .= "&expert=" . urlencode($_REQUEST['expert']) . "";
         if(isset($_REQUEST['associated_courses']) && $_REQUEST['associated_courses'] != '')
-            $mapsQuery .= "&UBC_courses=" . urlencode($_REQUEST['associated_courses']) . "";
+            $mapsQuery .= "&associated_courses=" . urlencode($_REQUEST['associated_courses']) . "";
         if(isset($_REQUEST['location']) && $_REQUEST['location'] != '')
             $mapsQuery .= "&location=" . urlencode($_REQUEST['location']) . "";
         if(isset($_REQUEST['cityregion']) && $_REQUEST['cityregion'] != '')
@@ -63,39 +63,39 @@
             $mapsQuery .= "&longitude=" . urlencode($_REQUEST['longitude    ']) . "";
         }
         if(isset($_REQUEST['min_ele']) && $_REQUEST['min_ele'] != '')
-            $mapsQuery .= "&elevation=" . urlencode($_REQUEST['min_ele']) . "";
+            $mapsQuery .= "&min_ele=" . urlencode($_REQUEST['min_ele']) . "";
         if(isset($_REQUEST['max_ele']) && $_REQUEST['max_ele'] != '')
-            $mapsQuery .= "&elevation=" . urlencode($_REQUEST['max_ele']) . "";
+            $mapsQuery .= "&max_ele=" . urlencode($_REQUEST['max_ele']) . "";
         if(isset($_REQUEST['ecosystem']) && $_REQUEST['ecosystem'] != '')
             $mapsQuery .= "&ecosystem=" . urlencode($_REQUEST['ecosystem']) . "";
         if(isset($_REQUEST['vegetation']) && $_REQUEST['vegetation'] != '')
-            $mapsQuery .= "&current_veg_desc=" . urlencode($_REQUEST['vegetation']) . "";
+            $mapsQuery .= "&vegetation=" . urlencode($_REQUEST['vegetation']) . "";
         if(isset($_REQUEST['land_use']) && $_REQUEST['land_use'] != '')
-            $mapsQuery .= "&current_land_use=" . urlencode($_REQUEST['land_use']) . "";
+            $mapsQuery .= "&land_use=" . urlencode($_REQUEST['land_use']) . "";
         if(isset($_REQUEST['topography']) && $_REQUEST['topography'] != '')
             $mapsQuery .= "&topography=" . urlencode($_REQUEST['topography']) . "";
         if(isset($_REQUEST['glaciation']) && $_REQUEST['glaciation'] != '')
-            $mapsQuery .= "&affected_by_glaciation=" . urlencode($_REQUEST['glaciation']) . "";
+            $mapsQuery .= "&glaciation=" . urlencode($_REQUEST['glaciation']) . "";
         if(isset($_REQUEST['bc_biogeoclimatic_zone']) && $_REQUEST['bc_biogeoclimatic_zone'] != '')
             $mapsQuery .= "&bc_biogeoclimatic_zone=" . urlencode($_REQUEST['bc_biogeoclimatic_zone']) . "";
         if(isset($_REQUEST['climate_zone']) && $_REQUEST['climate_zone'] != '')
             $mapsQuery .= "&climate_zone=" . urlencode($_REQUEST['climate_zone']) . "";
         if(isset($_REQUEST['min_mean_annual_temp']) && $_REQUEST['min_mean_annual_temp'] != '')
-            $mapsQuery .= "&mean_annual_temp=" . urlencode($_REQUEST['min_mean_annual_temp']) . "";
+            $mapsQuery .= "&min_mean_annual_temp=" . urlencode($_REQUEST['min_mean_annual_temp']) . "";
         if(isset($_REQUEST['max_mean_annual_temp']) && $_REQUEST['max_mean_annual_temp'] != '')
-            $mapsQuery .= "&mean_annual_temp=" . urlencode($_REQUEST['max_mean_annual_temp']) . "";
+            $mapsQuery .= "&max_mean_annual_temp=" . urlencode($_REQUEST['max_mean_annual_temp']) . "";
         if(isset($_REQUEST['min_min_annual_temp']) && $_REQUEST['min_min_annual_temp'] != '')
-            $mapsQuery .= "&minimum_annual_temp=" . urlencode($_REQUEST['min_min_annual_temp']) . "";
+            $mapsQuery .= "&min_min_annual_temp=" . urlencode($_REQUEST['min_min_annual_temp']) . "";
         if(isset($_REQUEST['max_min_annual_temp']) && $_REQUEST['max_min_annual_temp'] != '')
-            $mapsQuery .= "&minimum_annual_temp=" . urlencode($_REQUEST['max_min_annual_temp']) . "";
+            $mapsQuery .= "&max_min_annual_temp=" . urlencode($_REQUEST['max_min_annual_temp']) . "";
         if(isset($_REQUEST['min_max_annual_temp']) && $_REQUEST['min_max_annual_temp'] != '')
-            $mapsQuery .= "&maximum_annual_temp=" . urlencode($_REQUEST['min_max_annual_temp']) . "";
+            $mapsQuery .= "&min_max_annual_temp=" . urlencode($_REQUEST['min_max_annual_temp']) . "";
         if(isset($_REQUEST['max_max_annual_temp']) && $_REQUEST['max_max_annual_temp'] != '')
-            $mapsQuery .= "&maximum_annual_temp=" . urlencode($_REQUEST['max_max_annual_temp']) . "";
+            $mapsQuery .= "&max_max_annual_temp=" . urlencode($_REQUEST['max_max_annual_temp']) . "";
         if(isset($_REQUEST['min_annual_prec']) && $_REQUEST['min_annual_prec'] != '')
-            $mapsQuery .= "&mean_annual_prec=" . urlencode($_REQUEST['min_annual_prec']) . "";
+            $mapsQuery .= "&min_annual_prec=" . urlencode($_REQUEST['min_annual_prec']) . "";
         if(isset($_REQUEST['max_annual_prec']) && $_REQUEST['max_annual_prec'] != '')
-            $mapsQuery .= "&mean_annual_prec=" . urlencode($_REQUEST['max_annual_prec']) . "";
+            $mapsQuery .= "&max_annual_prec=" . urlencode($_REQUEST['max_annual_prec']) . "";
         if(isset($_REQUEST['soil_order']) && $_REQUEST['soil_order'] != '')
             $mapsQuery .= "&soil_order=" . urlencode($_REQUEST['soil_order']) . "";
         if(isset($_REQUEST['great_group']) && $_REQUEST['great_group'] != '')
@@ -105,25 +105,25 @@
         if(isset($_REQUEST['classification_code']) && $_REQUEST['classification_code'] != '')
             $mapsQuery .= "&classification_code=" . urlencode($_REQUEST['classification_code']) . "";
         if(isset($_REQUEST['horizon_present']) && $_REQUEST['horizon_present'] != '')
-            $mapsQuery .= "&soil_horizons_present=" . urlencode($_REQUEST['horizon_present']) . "";
+            $mapsQuery .= "&horizon_present=" . urlencode($_REQUEST['horizon_present']) . "";
         if(isset($_REQUEST['parent_material']) && $_REQUEST['parent_material'] != '')
             $mapsQuery .= "&parent_material=" . urlencode($_REQUEST['parent_material']) . "";
         if(isset($_REQUEST['soil_texture']) && $_REQUEST['soil_texture'] != '')
-            $mapsQuery .= "&soil_texture_horizon=" . urlencode($_REQUEST['soil_texture']) . "";
+            $mapsQuery .= "&soil_texture=" . urlencode($_REQUEST['soil_texture']) . "";
         if(isset($_REQUEST['soil_structure']) && $_REQUEST['soil_structure'] != '')
-            $mapsQuery .= "&soil_structure_horizon=" . urlencode($_REQUEST['soil_structure']) . "";
+            $mapsQuery .= "&soil_structure=" . urlencode($_REQUEST['soil_structure']) . "";
         if(isset($_REQUEST['forest_humus']) && $_REQUEST['forest_humus'] != '')
-            $mapsQuery .= "&forest_humus_form=" . urlencode($_REQUEST['forest_humus']) . "";
+            $mapsQuery .= "&forest_humus=" . urlencode($_REQUEST['forest_humus']) . "";
         if(isset($_REQUEST['charcoal']) && $_REQUEST['charcoal'] != '')
-            $mapsQuery .= "&charcoal_presence=" . urlencode($_REQUEST['charcoal']) . "";
+            $mapsQuery .= "&charcoal=" . urlencode($_REQUEST['charcoal']) . "";
         if(isset($_REQUEST['coatings']) && $_REQUEST['coatings'] != '')
-            $mapsQuery .= "&coatings_presence=" . urlencode($_REQUEST['coatings']) . "";
+            $mapsQuery .= "&coatings=" . urlencode($_REQUEST['coatings']) . "";
         if(isset($_REQUEST['soil_process_group']) && $_REQUEST['soil_process_group'] != '')
-            $mapsQuery .= "&primary_soil_process_group=" . urlencode($_REQUEST['soil_process_group']) . "";
+            $mapsQuery .= "&soil_process_group=" . urlencode($_REQUEST['soil_process_group']) . "";
         if(isset($_REQUEST['soil_process']) && $_REQUEST['soil_process'] != '')
-            $mapsQuery .= "&primary_soil_process=" . urlencode($_REQUEST['soil_process']) . "";
+            $mapsQuery .= "&soil_process=" . urlencode($_REQUEST['soil_process']) . "";
         if(isset($_REQUEST['description']) && $_REQUEST['description'] != '')
-        $mapsQuery .= "&technical_desc=" . urlencode($_REQUEST['description']) . "";
+            $mapsQuery .= "&description=" . urlencode($_REQUEST['description']) . "";
     
         wp_enqueue_script('soilweb-script-5', plugins_url( $mapsQuery, __FILE__) );
     }
@@ -399,13 +399,12 @@
         
         $array = soilweb_FT_query();
         
-        if($array['rows'][0][1] != NULL) {
+        if(sizeof($array) != 2) {
             
             $map = soilweb_map($array);
             $list = soilweb_list($array);
                                                                                                                                                                  
             $completeResults = '
-            
             <div id="soilweb-tabs">
                 <div id="menu-wrap">
                     <ul>
