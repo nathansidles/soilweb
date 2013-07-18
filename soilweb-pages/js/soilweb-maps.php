@@ -1,9 +1,11 @@
 <?php
-        
+    
+        $temp = 0;
+    
         $jsonQuery = "leave_blank=''";
-        
+    
         if(isset($_REQUEST['id']) && $_REQUEST['id'] != '')
-            $jsonQuery .= " AND id='" . $_REQUEST['id'] . "'";
+            $jsonQuery .= " AND id=" . $_REQUEST['id'] . "";
         if(isset($_REQUEST['site_name']) && $_REQUEST['site_name'] != '')
             $jsonQuery .= " AND site_name CONTAINS IGNORING CASE '" . $_REQUEST['site_name'] . "'";
         if(isset($_REQUEST['data_source']) && $_REQUEST['data_source'] != '')
@@ -14,12 +16,20 @@
             $jsonQuery .= " AND UBC_courses CONTAINS IGNORING CASE '" . $_REQUEST['associated_courses'] . "'";
         if(isset($_REQUEST['location']) && $_REQUEST['location'] != '')
             $jsonQuery .= " AND location CONTAINS IGNORING CASE '" . $_REQUEST['location'] . "'";
+        if(isset($_REQUEST['cityregion']) && $_REQUEST['cityregion'] != '')
+            $jsonQuery .= " AND cityregion CONTAINS IGNORING CASE '" . $_REQUEST['cityregion'] . "'";
         if(isset($_REQUEST['latitude']) && $_REQUEST['latitude'] != '') {
             $temp = 0;
             if(isset($_REQUEST['degrees']))
                 $temp = $_REQUEST['degrees'];
             $minLat = $_REQUEST['latitude'] - $temp;
+            if($minLat < -90) {
+                $minLat = -90;
+            }
             $maxLat = $_REQUEST['latitude'] + $temp;
+            if($maxLat > 90) {
+                $maxLat = 90;
+            }
             $jsonQuery .= " AND latitude>=" . $minLat . "";
             $jsonQuery .= " AND latitude<=" . $maxLat . "";
         }
@@ -28,7 +38,13 @@
             if(isset($_REQUEST['degrees']))
                 $temp = $_REQUEST['degrees'];
             $minLon = $_REQUEST['longitude'] - $temp;
+            if($minLon < -180) {
+                $minLon = -180;
+            }
             $maxLon = $_REQUEST['longitude'] + $temp;
+            if($maxLon > 180) {
+                $maxLon = 180;
+            }
             $jsonQuery .= " AND longitude>=" . $minLon . "";
             $jsonQuery .= " AND longitude<=" . $maxLon . "";
         }
