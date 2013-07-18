@@ -845,7 +845,7 @@
             }
             if($array['rows'][0][68] != "") {
                 $completeSite .= '
-                    <img width="100%" src="' . $array['rows'][0][68] . '" alt="' . $array['rows'][0][69] . '"></div>';
+                    <img width="100%" src="' . $array['rows'][0][68] . '" alt="' . $array['rows'][0][69] . '">';
                     if($array['rows'][0][69] != "") {
                         $completeSite .= '
                             <p style="text-align: center">' . $array['rows'][0][69] . '</p>';
