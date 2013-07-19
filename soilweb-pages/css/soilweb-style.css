@@ -48,6 +48,7 @@
     color:#EEE;
     margin-bottom: 2px;
     padding: 10px;
+    cursor: pointer;
 }
 
 .soilweb-accordion-title-1 {
@@ -80,7 +81,7 @@
 }
 
 .soilweb-accordion-pane-1, .soilweb-accordion-pane-2 {
-    margin-bottom: 2px;
+    margin-bottom: 10px;
     border:1px solid #ededed;
     border-radius: 5px;
     background-color: #feffeb;
