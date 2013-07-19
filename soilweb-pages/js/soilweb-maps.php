@@ -1,5 +1,5 @@
 <?php
-    
+        
         $temp = 0;
     
         $jsonQuery = "leave_blank=''";
@@ -111,8 +111,7 @@
         if(isset($_REQUEST['description']) && $_REQUEST['description'] != '')
             $jsonQuery .= " AND technical_desc CONTAINS IGNORING CASE '" . $_REQUEST['description'] . "'";
         
-        echo '
-        google.load(\'visualization\', \'1\', {\'packages\':[\'corechart\', \'table\', \'geomap\']});
+        echo 'google.load(\'visualization\', \'1\', {\'packages\':[\'corechart\', \'table\', \'geomap\']});
                     
             var FT_TableID = "1GcsfYO1GmcM7Xd2BNqoyJTfaH6Ml7jhwzOPS-wQ";
             var layer = null;
@@ -172,6 +171,7 @@
                 map.fitBounds(bounds);
             }
             }
+             google.maps.event.addDomListener(window, "load", initialize);
 ';
                                  
 ?>
