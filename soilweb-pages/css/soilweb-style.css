@@ -1,38 +1,15 @@
-/* =Media queries
--------------------------------------------------------------- */
-
-/* Minimum width of 600 pixels. */
-@media screen and (min-width: 600px) {
-    
-    /* Search (Soilweb) (wide)
-    ----------------------------------------------- */
-
-    .soilweb-search-left {
-        float: left;
-        width: 48%;
-    }
-
-    .soilweb-search-right {
-        width: 48%;
-        float: right;
-    }
-    
-    /* Site (Soilweb) (wide)
-    ----------------------------------------------- */
-    
-    .soilweb-site-left {
-        float: left;
-        width: 48%;
-    }
-    
-    .soilweb-site-right {
-        float: right;
-        width: 48%;
-    }
-}
-
 /* Soil Site Content Boxes (Soilweb)
 ----------------------------------------------- */
+
+.soilweb-search-left, .soilweb-site-left {
+    float: left;
+    width: 48%;
+}
+
+.soilweb-search-right, .soilweb-site-right {
+    float: right;
+    width: 48%;
+}
 
 .soilweb-content-top, .soilweb-content-media, .soilweb-content-box, .soilweb-content-links {
     background-color: #feffeb;
@@ -212,6 +189,8 @@
     padding-top: 10px;
     padding-bottom: 10px;
     text-align: center;
+    *display: inline;
+    zoom: 1;
 }
 
 #soilweb-tabs #menu-wrap li a {
@@ -243,9 +222,43 @@
     border-radius: 5px;
     background-color: #feffeb;
     padding: 10px 10px;
+    display: block;
 }
 
 #soilweb-tabs #map, #soilweb-tabs #list {
     height: 550px;
     overflow: scroll;
+}
+
+/* =Media queries
+-------------------------------------------------------------- */
+
+/* Minimum width of 600 pixels. */
+@media screen and (max-width: 600px) {
+    
+    /* Search (Soilweb) (wide)
+    ----------------------------------------------- */
+
+    .soilweb-search-left {
+    float: none;
+    width: 100%;
+    }
+
+    .soilweb-search-right {
+    float: none;
+    width: 100%;
+    }
+    
+    /* Site (Soilweb) (wide)
+    ----------------------------------------------- */
+    
+    .soilweb-site-left {
+    float: none;
+    width: 100%;
+    }
+    
+    .soilweb-site-right {
+    float: non;
+    width: 100%;
+    }
 }

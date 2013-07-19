@@ -3,7 +3,7 @@
     /*
      Plugin Name: Soilweb
      Plugin URI:
-     Description: This plugin contains shortcode for creating the SoilWeb filter bar ([soilweb_filter]), search page([soilweb_search]), map page ([soilweb_map]), aggregated search results page ([soilweb_results], both as a list ([soilweb_list]) and as a map([soilweb_map])), and individual soil site page ([soilweb_site]). It also has some supporting JavaScript and CSS files.
+     Description: This plugin contains shortcode for creating the SoilWeb filter bar ([soilweb_filter]), search page([soilweb_search]), map page ([soilweb_map]), aggregated search results page ([soilweb_results] both as a list ([soilweb_list]) and as a map([soilweb_map])), and individual soil site page ([soilweb_site]). It also has some supporting JavaScript and CSS files.
      Version: 1.0.0
      Author: Nathan Sidles
      Author URI: http://www.citykindaguy.com/
@@ -128,7 +128,7 @@
         wp_enqueue_script('soilweb-script-5', plugins_url( $mapsQuery, __FILE__) );
     }
     function soilweb_enqueue_style_1(){
-        wp_enqueue_style('soilweb-style-1', plugins_url( 'soilweb-style.css' , __FILE__) );
+        wp_enqueue_style('soilweb-style-1', plugins_url( '/css/soilweb-style.css' , __FILE__) );
     }
     
     add_action('wp_enqueue_scripts','soilweb_enqueue_script_1');
