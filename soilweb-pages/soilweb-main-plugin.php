@@ -559,6 +559,8 @@
                                         <option value="Volcanic tephra">Volcanic tephra</option>
                                         <option value="Eolian sand">Eolian sand</option>
                                         <option value="Colluvium">Colluvium</option>
+                                        <option value="Cumulose">Cumulose</option>
+                                        <option value="Residual">Residual</option>
                                     </select>
                                 </td>
                             </tr>
