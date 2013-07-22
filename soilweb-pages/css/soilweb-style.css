@@ -38,10 +38,6 @@
     padding-bottom: 0px;
 }
 
-.soilweb-content-box {
-    background-color: #eeffee;
-}
-
 .soilweb-accordion-title-1, .soilweb-accordion-title-2, .soilweb-accordion-title-3, .soilweb-accordion-title-4, .soilweb-accordion-title-5, .soilweb-accordion-title-6, .soilweb-accordion-title-7 {
     border:1px solid #;
     border-radius: 5px;
@@ -49,6 +45,7 @@
     margin-bottom: 2px;
     padding: 10px;
     cursor: pointer;
+    text-align: left;
 }
 
 .soilweb-accordion-title-1 {
@@ -86,6 +83,7 @@
     border-radius: 5px;
     background-color: #feffeb;
     padding: 10px;
+    overflow: hidden;
 }
 
 .soilweb-accordion-pane-2 {
@@ -162,8 +160,14 @@
     background: #feffeb;
     border: 1px solid #ededed;
     border-radius: 5px;
-    margin-bottom: 24px;
+    margin-bottom: 10px;
 }
+.soilweb-search-box p {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+
 
 /* Search Results Tabs (Soilweb)
 ----------------------------------------------- */
