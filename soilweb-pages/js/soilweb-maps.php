@@ -105,6 +105,10 @@
                         select: \'latitude,longitude\',
                         from: FT_TableID,
                         where: "' . $jsonQuery . '"
+                    },
+                    options: {
+                        styleId: 2,
+                        templateId: 2,
                     }
                 });
                 
