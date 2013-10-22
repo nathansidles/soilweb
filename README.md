@@ -8,3 +8,5 @@ soilweb-main-plugin.php - contains shortcodes
 soilweb-style.css - contains stylesheet for shortcodes
 
 soilweb-armlmaker.php - generates KML/ARML file for Augmented Reality
+
+soilweb-instruction-maker.php - contains code for plugin instruction pages

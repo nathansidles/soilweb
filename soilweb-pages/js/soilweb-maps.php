@@ -79,7 +79,7 @@
         
         echo 'google.load(\'visualization\', \'1\', {\'packages\':[\'corechart\', \'table\', \'geomap\']});
                     
-            var FT_TableID = "1HGHJ4NcEA9c2MMQgFEF-gIvRpjqGeuke126Q4nU";
+            var FT_TableID = "' . $_REQUEST['soilweb_ft_address'] . '";
             var layer = null;
             
             function initialize() {
