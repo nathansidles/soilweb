@@ -1,0 +1,269 @@
+/* Soil Site Content Boxes (Soilweb)
+----------------------------------------------- */
+
+.soilweb-search-left, .soilweb-site-left {
+    float: left;
+    width: 48%;
+}
+
+.soilweb-search-right, .soilweb-site-right {
+    float: right;
+    width: 48%;
+}
+
+.soilweb-content-top, .soilweb-content-media, .soilweb-content-box, .soilweb-content-links {
+    background-color: #feffeb;
+    margin-bottom: 20px;
+    border: 1px solid #ededed;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.soilweb-content-top h3, .soilweb-content-media h3, .soilweb-content-box h3, .soilweb-content-links h3 {
+    color:#542437;
+    padding:0;
+    margin:10px 0;
+    text-align: center;
+}
+
+.soilweb-content-top p, .soilweb-content-media p, .soilweb-content-box p, .soilweb-content-links p {
+    color:#542437;
+    padding:0;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.soilweb-content-top {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.soilweb-accordion-title-1, .soilweb-accordion-title-2, .soilweb-accordion-title-3, .soilweb-accordion-title-4, .soilweb-accordion-title-5, .soilweb-accordion-title-6, .soilweb-accordion-title-7 {
+    border:1px solid #;
+    border-radius: 5px;
+    color:#EEE;
+    margin-bottom: 2px;
+    padding: 10px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.soilweb-accordion-title-1 {
+    background: #326931;
+}
+
+.soilweb-accordion-title-2 {
+    background: #4b6f4a;
+}
+
+.soilweb-accordion-title-3 {
+    background: #515c49;
+}
+
+.soilweb-accordion-title-4 {
+    background: #4c4d3e;
+}
+
+.soilweb-accordion-title-5 {
+    background: #3d3d32;
+}
+
+.soilweb-accordion-title-6 {
+    background: #36362c;
+}
+
+.soilweb-accordion-title-7 {
+    background: #292922;
+    margin-bottom: 20px;
+}
+
+.soilweb-accordion-pane-1, .soilweb-accordion-pane-2 {
+    margin-bottom: 10px;
+    border:1px solid #ededed;
+    border-radius: 5px;
+    background-color: #feffeb;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.soilweb-accordion-pane-2 {
+    margin-top: -18px;
+    margin-bottom: 20px;
+}
+
+.soilweb-content-media {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.soilweb-content-links {
+}
+
+
+/* Soil Site Google Maps Display Div (Soilweb)
+----------------------------------------------- */
+
+#googft-mapCanvas img { max-width: none; box-shadow: none; }
+
+/* Filter Box (Soilweb)
+----------------------------------------------- */
+
+.soilweb-filter {
+    text-align: center;
+    width: 100%;
+    background: #feffeb;
+    border: 1px solid #ededed;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+}
+
+.soilweb-filter #filter-left {
+    display:inline-block;
+    padding:0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 2px;
+    vertical-align: middle;
+}
+
+
+.soilweb-filter #filter-left h3 {
+    color:#777777;
+    padding:0px;
+    margin:0px;
+}
+
+.soilweb-filter #filter-middle {
+    display:inline-block;
+    padding-left:10px;
+    padding-right:10px;
+    padding-bottom: 4px;
+}
+
+.soilweb-filter #filter-right {
+    display:inline-block;
+    padding-left:10px;
+    padding-right 10px;
+}
+
+.soilweb-filter #filter-right input {
+    padding:5px;
+}
+
+/* Search Boxes (Soilweb)
+----------------------------------------------- */
+
+.soilweb-search-box {
+    width: 100%;
+    overflow: hidden;
+    background: #feffeb;
+    border: 1px solid #ededed;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.soilweb-search-box p {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+
+
+/* Search Results Tabs (Soilweb)
+----------------------------------------------- */
+
+#soilweb-tabs #menu-wrap {
+    text-align: center; 
+}
+
+#soilweb-tabs #menu-wrap ul {
+    margin: 0px;
+}
+
+#soilweb-tabs #menu-wrap li {
+    display: inline-block; 
+    float: none; 
+    top: 0px; 
+    margin: 0em;
+    padding: 0px;
+    margin-bottom: -1px;
+    border: 1px solid #ededed;
+    border-bottom: 0px;
+    border-radius: 5px 5px 0 0;
+    background-color: #353b17;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    *display: inline;
+    zoom: 1;
+}
+
+#soilweb-tabs #menu-wrap li a {
+    padding: 10px;
+    color: #dddddd;
+    text-decoration: none;
+    text-align: center; 
+}
+
+#soilweb-tabs #menu-wrap li a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+#soilweb-tabs #menu-wrap .ui-state-active {
+    background-color: #feffeb;
+}
+
+#soilweb-tabs #menu-wrap .ui-state-active a {
+    color: #000000;
+}
+
+#soilweb-tabs #menu-wrap .ui-state-active a:hover {
+    color: black;
+}
+
+#soilweb-tabs .soilweb-tabs-pane {
+    border: 1px solid #ededed;  
+    border-radius: 5px;
+    background-color: #feffeb;
+    padding: 10px 10px;
+    display: block;
+}
+
+#soilweb-tabs #map, #soilweb-tabs #list {
+    height: 550px;
+    overflow: scroll;
+}
+
+/* =Media queries
+-------------------------------------------------------------- */
+
+/* Minimum width of 600 pixels. */
+@media screen and (max-width: 600px) {
+    
+    /* Search (Soilweb) (wide)
+    ----------------------------------------------- */
+
+    .soilweb-search-left {
+    float: none;
+    width: 100%;
+    }
+
+    .soilweb-search-right {
+    float: none;
+    width: 100%;
+    }
+    
+    /* Site (Soilweb) (wide)
+    ----------------------------------------------- */
+    
+    .soilweb-site-left {
+    float: none;
+    width: 100%;
+    }
+    
+    .soilweb-site-right {
+    float: non;
+    width: 100%;
+    }
+}
