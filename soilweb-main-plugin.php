@@ -68,16 +68,6 @@
     
     add_shortcode('makesearchtech', 'soilweb_searchtech');
     
-    /*
-    Generates code for allowing administrators to add new elements to categorical search fields (e.g., Climate Zone)
-    @since     1.0.0
-    */
-    
-    function soilweb_options() {
-        wp_enqueue_script('soilweb-script-4', plugins_url( '/js/soilweb-options.php?' , __FILE__ ));
-    }
-    
-    add_shortcode('wp_enqueue_scripts', 'soilweb_options');
     
     /*
     Generates code for 'makefilter' shortcode, creating a filter box for quick searches
@@ -1258,7 +1248,6 @@
         
         soilweb_tabs();
         soilweb_enqueue_style_1();
-        soilweb_options();
     
         if(isset($_REQUEST['ecosystem_to_add']) && $_REQUEST['ecosystem_to_add'] != '') {
             $tempText = $_REQUEST['ecosystem_to_add'];
