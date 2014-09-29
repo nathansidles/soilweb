@@ -659,31 +659,39 @@
                                     Associated Course (keyword):
                                 </td>
                                 <td>
-                                    <input type="text" name="courses">
+                                    <select name="courses">
+                                        <option value="">Courses</option>
+                                        <option value="">---</option>
+        ';
+        
+        $tempArray = get_option('soilweb_courses');
+        sort($tempArray);
+        foreach($tempArray as $tempValue) {
+            $returnString .= '<option value="' . $tempValue . '">' . $tempValue . '</option>';
+        }
+        
+        $returnString .= '
+                                    </select>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    Associated University (keyword):
+                                    Associated University/Organization (keyword):
                                 </td>
                                 <td>
-                                    <input type="text" name="universities">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Video expert (keyword):
-                                </td>
-                                <td>
-                                    <input type="text" name="featured_expert">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Data Source (keyword):
-                                </td>
-                                <td>
-                                    <input type="text" name="source_name">
+                                    <select name="universities">
+                                        <option value="">Universities/Organizations</option>
+                                        <option value="">---</option>
+        ';
+        
+        $tempArray = get_option('soilweb_universities');
+        sort($tempArray);
+        foreach($tempArray as $tempValue) {
+            $returnString .= '<option value="' . $tempValue . '">' . $tempValue . '</option>';
+        }
+        
+        $returnString .= '
+                                    </select>
                                 </td>
                             </tr>
                         </table>
@@ -1199,6 +1207,8 @@
         add_option( 'soilweb_diagnostic_soil_texture', array());
         add_option( 'soilweb_parent_materials', array());
         add_option( 'soilweb_soil_processes_groups', array());
+        add_option( 'soilweb_universities', array());
+        add_option( 'soilweb_courses', array());
     }
     
     add_action( 'admin_init', 'soilweb_options_initializer');
@@ -1320,6 +1330,30 @@
             $tempArray = get_option('soilweb_soil_processes_groups');
             unset($tempArray[$tempText]);
             update_option('soilweb_soil_processes_groups', $tempArray);
+        }
+        if(isset($_REQUEST['soilweb_universities_to_add']) && $_REQUEST['soilweb_universities_to_add'] != '') {
+            $tempText = $_REQUEST['soilweb_universities_to_add'];
+            $tempArray = get_option('soilweb_universities');
+            $tempArray[$tempText] = $tempText;
+            update_option('soilweb_universities', $tempArray);
+        }
+        if(isset($_REQUEST['soilweb_universities_to_delete']) && $_REQUEST['soilweb_universities_to_delete'] != '') {
+            $tempText = $_REQUEST['soilweb_universities_to_delete'];
+            $tempArray = get_option('soilweb_universities');
+            unset($tempArray[$tempText]);
+            update_option('soilweb_universities', $tempArray);
+        }
+        if(isset($_REQUEST['soilweb_courses_to_add']) && $_REQUEST['soilweb_courses_to_add'] != '') {
+            $tempText = $_REQUEST['soilweb_courses_to_add'];
+            $tempArray = get_option('soilweb_courses');
+            $tempArray[$tempText] = $tempText;
+            update_option('soilweb_courses', $tempArray);
+        }
+        if(isset($_REQUEST['soilweb_courses_to_delete']) && $_REQUEST['soilweb_courses_to_delete'] != '') {
+            $tempText = $_REQUEST['soilweb_courses_to_delete'];
+            $tempArray = get_option('soilweb_courses');
+            unset($tempArray[$tempText]);
+            update_option('soilweb_courses', $tempArray);
         }
         
         include 'soilweb-instruction-maker.php';

@@ -102,6 +102,32 @@
     
     echo '
                     </select></p>
+                    <p>Add a University/Organization: <br /><input type="text" name="soilweb_universities_to_add"></p>
+                    <p>Delete a University/Organization: <br /><select name="soilweb_universities_group_to_delete">
+                        <option value="">---</option>
+    ';
+    
+    $tempArray = get_option('soilweb_universities');
+    sort($tempArray);
+    foreach($tempArray as $tempValue) {
+        echo '<option value="' . $tempValue . '">' . $tempValue . '</option>';
+    }
+    
+    echo '
+                    </select></p>
+                    <p>Add a Course: <br /><input type="text" name="soilweb_courses_to_add"></p>
+                    <p>Delete a Course: <br /><select name="soilweb_courses_to_delete">
+                        <option value="">---</option>
+    ';
+    
+    $tempArray = get_option('soilweb_courses');
+    sort($tempArray);
+    foreach($tempArray as $tempValue) {
+        echo '<option value="' . $tempValue . '">' . $tempValue . '</option>';
+    }
+    
+    echo '
+                    </select></p>
     ';
     
     submit_button("Save SOILx Categories Changes");
