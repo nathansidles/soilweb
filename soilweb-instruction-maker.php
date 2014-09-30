@@ -103,7 +103,7 @@
     echo '
                     </select></p>
                     <p>Add a University/Organization: <br /><input type="text" name="soilweb_universities_to_add"></p>
-                    <p>Delete a University/Organization: <br /><select name="soilweb_universities_group_to_delete">
+                    <p>Delete a University/Organization: <br /><select name="soilweb_universities_to_delete">
                         <option value="">---</option>
     ';
     
