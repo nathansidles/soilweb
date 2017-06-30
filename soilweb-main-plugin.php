@@ -4,87 +4,87 @@
      Plugin Name: Soilweb
      Plugin URI:
      Description: This plugin contains shortcode for creating the SoilWeb filter bar ([soilweb_filter]), search page([soilweb_search]), map page ([soilweb_map]), aggregated search results page ([soilweb_results] both as a list ([soilweb_list]) and as a map([soilweb_map])), and individual soil site page ([soilweb_site]). It also has some supporting JavaScript and CSS files.
-     Version: 1.1.0
+     Version: 1.1.1
      Author: Nathan Sidles
      Author URI: http://www.citykindaguy.com/
      License: GPL2
-     
+
      This program is free software; you can redistribute it and/or modify
      it under the terms of the GNU General Public License, version 2, as
      published by the Free Software Foundation.
-     
+
      This program is distributed in the hope that it will be useful,
      but WITHOUT ANY WARRANTY; without even the implied warranty of
      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
      GNU General Public License for more details.
-     
+
      You should have received a copy of the GNU General Public License
      along with this program; if not, write to the Free Software
      Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-     
+
      */
-    
+
     /*
     Queues the soilweb-style stylesheet, enabling formatting for SoilWeb panes
     @since     1.0.0
     */
-    
+
     function soilweb_enqueue_style_1(){
         wp_enqueue_style('soilweb-style-1', plugins_url( '/css/soilweb-style.css' , __FILE__) );
     }
-    
+
     add_action('wp_enqueue_scripts','soilweb_enqueue_style_1');
-    
+
     /*
     Generates code for 'maketabs' shortcode, enqueuing soilweb-tabs, which enables tabs in a page
     @since     1.0.0
     */
-    
+
     function soilweb_tabs() {
         wp_enqueue_script('soilweb-script-1', plugins_url( '/js/soilweb-tabs.js' , __FILE__ ), array('jquery-ui-tabs'));
     }
-    
+
     add_shortcode('maketabs', 'soilweb_tabs');
-    
+
     /*
     Generates code for 'makeaccordions' shortcode, enqueuing soilweb-accordions, which enables accordions in a page
     @since     1.0.0
     */
-    
+
     function soilweb_accordions() {
         wp_enqueue_script('soilweb-script-2', plugins_url( '/js/soilweb-accordions.js' , __FILE__ ), array('jquery-ui-accordion'));
     }
-    
+
     add_shortcode('makeaccordions', 'soilweb_accordions');
-    
+
     /*
     Generates code for 'makesearchtech' shortcode, enqueuing soilweb-list, which enables the conditional drop-down list for soil orders, great groups, and subgroups
     @since     1.0.0
     */
-    
+
     function soilweb_searchtech() {
         wp_enqueue_script('soilweb-script-3', plugins_url( '/js/soilweb-list.js?' , __FILE__ ));
     }
-    
+
     add_shortcode('makesearchtech', 'soilweb_searchtech');
-    
-    
+
+
     /*
     Generates code for 'makefilter' shortcode, creating a filter box for quick searches
     @since     1.0.0
     @return    string  HTML
     */
-    
+
     function soilweb_filter() {
-        
+
         $randInt = rand();
-        
+
         $returnString = '<div class="soilweb-filter">
-        
+
             <div id="filter-left">
                 <h3>Get Soil Sites: </h3>
             </div>
-            
+
             <div id="filter-middle">
                 <form name="filter" action="../results/?search=' . $randInt . '" method="get">
                     <select name="soil_order">
@@ -101,19 +101,19 @@
                         <option value="Solonetz">Solonetz</option>
                         <option value="Vertisol">Vertisol</option>
                     </select>
-                    
+
                     <select name="ecosystem">
                         <option value="">Ecosystem</option>
                         <option value="">---</option>
         ';
-        
+
         foreach(get_option('soilweb_ecosystems') as $tempValue) {
             $returnString .= '<option value="' . $tempValue . '">' . $tempValue . '</option>';
         }
-        
+
         $returnString .= '
                     </select>
-                    
+
                     <select name="climate_zone">
                         <option value="">Climate Zone</option>
                         <option value="">---</option>
@@ -125,7 +125,7 @@
 
         $returnString .= '
                     </select>
-                    
+
                     <select name="bc_biogeoclimatic_zone">
                         <option value="">BC Biogeoclimatic Zone</option>
                         <option value="">---</option>
@@ -138,7 +138,7 @@
         $returnString .= '
                     </select>
             </div>
-                    
+
             <div id="filter-right">
                     <input type="submit" value="Filter All Sites">
                     <input type="reset" value="Reset Filters" />
@@ -146,27 +146,27 @@
             </div>
         </div>
         ';
-        
+
         return $returnString;
-        
+
     }
-    
+
     add_shortcode('makefilter', 'soilweb_filter');
-    
+
     /*
      Queries the Fusion Table, returning a std object
      @since     1.0.0
      @return    array  PHP array of results
      */
-    
+
     function soilweb_FT_query() {
-        
+
         $jsonStart = 'https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+*+FROM+';
-        
+
         $jsonStart .= get_option('soilweb_ft_address');
-        
+
         $jsonQuery = "";
-        
+
         if(isset($_REQUEST['id']) && $_REQUEST['id'] != '')
             $jsonQuery .= "+AND+id='" . urlencode($_REQUEST['id']) . "'";
         if(isset($_REQUEST['soil_order']) && $_REQUEST['soil_order'] != '')
@@ -227,39 +227,39 @@
             $jsonQuery .= "+AND+featured_expert+CONTAINS+IGNORING+CASE+'" . urlencode($_REQUEST['featured_expert']) . "'";
         if(isset($_REQUEST['source_name']) && $_REQUEST['source_name'] != '')
             $jsonQuery .= "+AND+source_name+CONTAINS+IGNORING+CASE+'" . urlencode($_REQUEST['source_name']) . "'";
-        
-        $jsonWhere = urlencode("+WHERE+leave_blank=''");
-        
+
+        $jsonWhere = "+WHERE+leave_blank=''";
+
         $jsonEnd = '&key=';
-        
+
         $jsonEnd .= get_option('soilweb_ft_key');
-        
+
         $jsonStart .= $jsonWhere;
-        
+
         $jsonStart .= $jsonQuery;
-        
+
         $jsonStart .= $jsonEnd;
-        
+
         $jsonData = file_get_contents($jsonStart);
-        
+
         $PHPdata = json_decode($jsonData);
-        
+
         $soilwebFTResults = soilweb_objectToArray($PHPdata);
-        
+
         return $soilwebFTResults;
-    
+
     }
-    
+
     /*
      Generates code for 'makelist' shortcode, creating a list of search results
      @since     1.0.0
      @return    string  HTML
      */
-    
+
     function soilweb_list($soilwebFTResults) {
-        
+
         $temp = sizeof($soilwebFTResults['rows']);
-        
+
             // Make a table with a header for the information
             $tableHTML = '
                 <table align="center" cellspacing="3" cellpadding="3" width="100%" style="margin:0px">
@@ -270,7 +270,7 @@
                         <td align="left"><strong>Region</strong></td>
                     </tr>
             ';
-            
+
             for($i = 0; $i < $temp; $i++) {
                 $tableHTML .= '
                     <tr>
@@ -281,27 +281,27 @@
                     </tr>
                 ';
             }
-            
+
             $tableHTML .= '
                 </table>
             ';
-        
+
         return $tableHTML;
-    
+
     }
-    
+
     add_shortcode('makelist', 'soilweb_list');
-    
+
     /*
      Generates code for 'makemap' shortcode, creating a map in a page
      @since     1.0.0
      @return    string  HTML
      */
-    
+
     function soilweb_map() {
         wp_enqueue_script('soilweb-script-4', 'http://www.google.com/jsapi', array(), 1, true );
-        wp_enqueue_script('soilweb-script-5', 'http://maps.googleapis.com/maps/api/js?sensor=false', array(), 1, true );
-        
+        wp_enqueue_script('soilweb-script-5', 'http://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyAoEuL-KCZzfLHEGg2l7lRBxS8kZGjTg3k', array(), 1, true );
+
         $mapsQuery = "/js/soilweb-maps.php?soilweb_ft_address=" . get_option('soilweb_ft_address') . "";
 
         if(isset($_REQUEST['id']) && $_REQUEST['id'] != '')
@@ -355,29 +355,29 @@
         if(isset($_REQUEST['source_name']) && $_REQUEST['source_name'] != '')
             $mapsQuery .= "&source_name=" . urlencode($_REQUEST['source_name']) . "";
 
-    
+
         wp_enqueue_script('soilweb-script-6', plugins_url( $mapsQuery, __FILE__), array('soilweb-script-4','soilweb-script-5'), 1, true );
-        
+
         return '<div id="googft-mapCanvas" style="width:100%; height:550px;"></div>';
-                                 
+
     }
 
     add_shortcode('makemap', 'soilweb_map');
-    
+
     /*
     Generates code for search results, calling soilweb_map and soilweb_list
     @since     1.0.0
     */
-    
+
     function soilweb_results() {
-        
+
         $soilwebFTResults = soilweb_FT_query();
-        
+
         if(sizeof($soilwebFTResults) != 2) {
 
             $map = soilweb_map($soilwebFTResults);
             $list = soilweb_list($soilwebFTResults);
-            
+
             $completeResults = '<div id="soilweb-tabs">
                     <div id="menu-wrap">
                         <ul>
@@ -386,48 +386,48 @@
                         </ul>
                     </div>
                     <div class="soilweb-tabs-pane" id="map">';
-                    
+
                         $completeResults .= $map;
-                    
+
                     $completeResults .= '</div>
                     <div class="soilweb-tabs-pane" id="list">';
-                    
+
                         $completeResults .= $list;
-                    
+
                     $completeResults .= '</div>
                 </div>
             ';
-            
+
             return $completeResults;
         } else {
             return '<p>No results found</p>';
         }
-        
+
     }
     add_shortcode('makeresults', 'soilweb_results');
-    
+
     /*
      Generates code for 'makesearch' shortcode, creating a search page
      @since     1.0.0
      @return    string  HTML
      */
-    
+
     function soilweb_search() {
-        
+
         $jsonStart = 'https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+id+FROM+';
-        
+
         $jsonStart .= get_option('soilweb_ft_address');
-        
+
         $jsonStart .= '&key=';
-        
+
         $jsonStart .= get_option('soilweb_ft_key');
-        
+
         $jsonData = file_get_contents($jsonStart);
-        
+
         $PHPdata = json_decode($jsonData);
-        
+
         $soilwebFTResults = soilweb_objectToArray($PHPdata);
-        
+
         $returnString = '
             <form name="soilweb_search" style="text-align: center" action="../results/" metho="GET" onload="fillCategory();">
                 <div class="soilweb-search-left">
@@ -479,11 +479,11 @@
                                         <option value="">Ecosystem</option>
                                         <option value="">---</option>
         ';
-        
+
         foreach(get_option('soilweb_ecosystems') as $tempValue) {
             $returnString .= '<option value="' . $tempValue . '">' . $tempValue . '</option>';
         }
-        
+
         $returnString .= '
                                     </select>
                                 </td>
@@ -497,11 +497,11 @@
                                         <option value="">BC Biogeoclimatic Zone</option>
                                         <option value="">---</option>
         ';
-        
+
         foreach(get_option('soilweb_bc_biogeoclimatic_zones') as $tempValue) {
             $returnString .= '<option value="' . $tempValue . '">' . $tempValue . '</option>';
         }
-        
+
         $returnString .= '
                                     </select>
                                 </td>
@@ -515,11 +515,11 @@
                                         <option value="">Climate Zone</option>
                                         <option value="">---</option>
         ';
-        
+
         foreach(get_option('soilweb_climate_zones') as $tempValue) {
             $returnString .= '<option value="' . $tempValue . '">' . $tempValue . '</option>';
         }
-        
+
         $returnString .= '
                                     </select>
                                 </td>
@@ -543,11 +543,11 @@
                                         <option value="">Diagnostic Soil Texture</option>
                                         <option value="">---</option>
         ';
-        
+
         foreach(get_option('soilweb_diagnostic_soil_textures') as $tempValue) {
             $returnString .= '<option value="' . $tempValue . '">' . $tempValue . '</option>';
         }
-        
+
         $returnString .= '
                                     </select>
                                 </td>
@@ -561,11 +561,11 @@
                                         <option value="">Parent Material</option>
                                         <option value="">---</option>
         ';
-        
+
         foreach(get_option('soilweb_parent_materials') as $tempValue) {
             $returnString .= '<option value="' . $tempValue . '">' . $tempValue . '</option>';
         }
-        
+
         $returnString .= '
                                     </select>
                                 </td>
@@ -579,11 +579,11 @@
                                         <option value="">Soil Process Group</option>
                                         <option value="">---</option>
         ';
-        
+
         foreach(get_option('soilweb_soil_processes_groups') as $tempValue) {
             $returnString .= '<option value="' . $tempValue . '">' . $tempValue . '</option>';
         }
-        
+
         $returnString .= '
                                     </select>
                                 </td>
@@ -663,13 +663,13 @@
                                         <option value="">Courses</option>
                                         <option value="">---</option>
         ';
-        
+
         $tempArray = get_option('soilweb_courses');
         sort($tempArray);
         foreach($tempArray as $tempValue) {
             $returnString .= '<option value="' . $tempValue . '">' . $tempValue . '</option>';
         }
-        
+
         $returnString .= '
                                     </select>
                                 </td>
@@ -683,13 +683,13 @@
                                         <option value="">Universities/Organizations</option>
                                         <option value="">---</option>
         ';
-        
+
         $tempArray = get_option('soilweb_universities');
         sort($tempArray);
         foreach($tempArray as $tempValue) {
             $returnString .= '<option value="' . $tempValue . '">' . $tempValue . '</option>';
         }
-        
+
         $returnString .= '
                                     </select>
                                 </td>
@@ -711,41 +711,41 @@
             </div>
         </div>
         ';
-        
+
         return $returnString;
     }
-    
+
     add_shortcode('makesearch', 'soilweb_search');
-    
+
     /*
      Generates code for 'makesite' shortcode, creating a soil site page
      @since     1.0.0
      @return    string  HTML
      */
-    
+
     function soilweb_site() {
-        
+
         if(isset($_REQUEST['id'])) {
             $id = $_REQUEST['id'];
         } else {
             $id = 0;
         }
-        
+
         if($id) {
             $soilwebFTResults = soilweb_FT_query();
         }
-        
+
         if($id != 0) {
             if(sizeof($soilwebFTResults) != 2) {
 
-                
+
                 $completeSite = '
                     <div class="soilweb-content-top"><h3>Site '
                     .esc_html($soilwebFTResults['rows'][0][1]).
                     ': '
                     .esc_html($soilwebFTResults['rows'][0][2])
                 ;
-                
+
                 if(esc_html($soilwebFTResults['rows'][0][3] != "")) {
                     $completeSite .= '
                         ('
@@ -753,18 +753,18 @@
                         ')
                     ';
                 }
-                
+
                 $completeSite .= '
                     </h3><p>'
                     .esc_html($soilwebFTResults['rows'][0][50]).
                     '</p>
                 ';
-                
+
                 if(esc_html($soilwebFTResults['rows'][0][5] != "") || esc_html($soilwebFTResults['rows'][0][4] != "")) {
                     $completeSite .= '
                         <p style="text-align: right; color: #aaa">Source:
                     ';
-                
+
                     if(esc_html($soilwebFTResults['rows'][0][5] != "")) {
                         $completeSite .= '
                             <a href="'
@@ -790,12 +790,12 @@
                         </p>
                     ';
                 }
-                
+
                 $completeSite .= '
                     </div>
                 ';
-                
-                    
+
+
                 $completeSite .= '
                     <div class="soilweb-site-left">
                     <div class="soilweb-content-box">
@@ -821,7 +821,7 @@
                         '</p>
                     </div>
                 ';
-                
+
                 $completeSite .= '
                     <div id="soilweb-accordion-1">
                         <div class="soilweb-accordion-title-1">
@@ -851,7 +851,7 @@
                             '</p>
                         </div>
                     </div>
-                    
+
                     <div id="soilweb-accordion-2">
                         <div class="soilweb-accordion-title-2">
                             Land Form
@@ -870,7 +870,7 @@
                             '</p>
                         </div>
                     </div>
-                    
+
                     <div id="soilweb-accordion-3">
                         <div class="soilweb-accordion-title-3">
                            Climate
@@ -889,7 +889,7 @@
                             '</p>
                         </div>
                     </div>
-                    
+
                     <div id="soilweb-accordion-4">
                         <div class="soilweb-accordion-title-4">
                            Land Use
@@ -904,7 +904,7 @@
                             '</p>
                         </div>
                     </div>
-                    
+
                     <div id="soilweb-accordion-5">
                         <div class="soilweb-accordion-title-5">
                             Technical Description
@@ -924,7 +924,7 @@
                             }
                         $completeSite .= '</div>
                     </div>
-                    
+
                     <div id="soilweb-accordion-6">
                         <div class="soilweb-accordion-title-6">
                             Soil Morphology
@@ -941,7 +941,7 @@
                             '</p>
                         </div>
                     </div>
-                    
+
                     <div id="soilweb-accordion-7">
                         <div class="soilweb-accordion-title-7">
                             Soil Formation Processes
@@ -956,15 +956,15 @@
                             '</p>
                         </div>
                     </div>
-                
+
                 ';
-                
+
                 $completeSite .= '</div>
                     <div class="soilweb-site-right">
                     <div class="soilweb-content-media">
                     <h3>Media</h3>
                 ';
-                
+
                 if(esc_url($soilwebFTResults['rows'][0][66]) != "") {
                     $completeSite .= '
                         <iframe width="100%" height="300" src="'
@@ -1064,18 +1064,18 @@
                         <img width="100%" src="http://ar-soilweb.sites.olt.ubc.ca/files/2013/07/oops.png" alt="No media found">
                     ';
                 }
-                
+
                 $completeSite .= '</div>
                     <div class="soilweb-content-links">
                     <h3>Links</h3>
                 ';
-                
+
                 if(esc_url($soilwebFTResults['rows'][0][53]) != '' || esc_url($soilwebFTResults['rows'][0][55]) != '' || esc_url($soilwebFTResults['rows'][0][57]) != '' || esc_url($soilwebFTResults['rows'][0][59]) != '' || esc_url($soilwebFTResults['rows'][0][61]) != '' || esc_url($soilwebFTResults['rows'][0][63]) != '') {
-                
+
                     $completeSite .= '
                         <p>
                     ';
-                    
+
                     if(esc_url($soilwebFTResults['rows'][0][53]) != '') {
                         $completeSite .= '
                             <strong>External Page:</strong> <a href="'
@@ -1130,19 +1130,19 @@
                             '</a>
                         ';
                     }
-                    
-                
+
+
                     $completeSite .= '
                         </p>
                     ';
-                
+
                 }
-                
+
                 $completeSite .= '
                     </div>
                     </div>
                 ';
-                
+
             } else {
                 $completeSite = '
                     <p>No valid soil site selected; please try again.</p>
@@ -1153,25 +1153,25 @@
                 <p>No valid soil site selected; please try again.</p>
             ';
         }
-        
+
         return $completeSite;
-        
+
     }
     add_shortcode('makesite', 'soilweb_site');
-    
+
     /*
      Consumes a std object and makes from it a PHP array
      @since     1.0.0
      @return    array PHP array
      */
-    
+
     function soilweb_objectToArray($soilwebFTReturn) {
 		if (is_object($soilwebFTReturn)) {
 			// Gets the properties of the given object
 			// with get_object_vars function
 			$soilwebFTReturn = get_object_vars($soilwebFTReturn);
 		}
-        
+
 		if (is_array($soilwebFTReturn)) {
 			/*
              * Return array converted to object
@@ -1185,7 +1185,7 @@
 			return $soilwebFTReturn;
 		}
 	}
-    
+
     /*
      Generates code for the Options/Admin page
      @since     1.0.0
@@ -1193,14 +1193,14 @@
      */
 
     function soilweb_options_initializer() {
-            
+
         add_settings_section('soilweb_ft_data', '', 'soilweb_ft_data_callback_functions', 'soilweb-instruction-page');
-        
+
         add_settings_field( 'soilweb_ft_address', 'Fusion Table Address:', 'soilweb_ft_address', 'soilweb-instruction-page', 'soilweb_ft_data');
         register_setting('soilweb_ft_data', 'soilweb_ft_address');
         add_settings_field( 'soilweb_ft_key', 'Fusion Table Key:', 'soilweb_ft_key', 'soilweb-instruction-page', 'soilweb_ft_data');
         register_setting('soilweb_ft_data', 'soilweb_ft_key');
-        
+
         add_option( 'soilweb_climate_zones', array());
         add_option( 'soilweb_ecosystems', array());
         add_option( 'soilweb_bc_biogeoclimatic_zones', array());
@@ -1210,33 +1210,33 @@
         add_option( 'soilweb_universities', array());
         add_option( 'soilweb_courses', array());
     }
-    
+
     add_action( 'admin_init', 'soilweb_options_initializer');
-    
+
     /*
      Generates code for Fusion Table address input
      @since     1.0.0
      @return    n/a
      */
-    
+
     function soilweb_ft_address(){
         echo '<input type="text" id="ft_address_id" name="soilweb_ft_address" value="';
         echo get_option( 'soilweb_ft_address');
         echo '" /><br />';
     }
-    
+
     /*
      Generates code for Fusion Table key input
      @since     1.0.0
      @return    n/a
      */
-    
+
     function soilweb_ft_key(){
         echo '<input type="text" id="ft_key_id" name="soilweb_ft_key" value="';
         echo get_option( 'soilweb_ft_key');
         echo '" />';
     }
-    
+
     function soilweb_ft_data_callback_functions() {
     }
 
@@ -1248,17 +1248,17 @@
     function soilweb_instructions_initializer() {
         if ( !current_user_can( 'manage_options' ) )
             wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
-        
+
         if(isset($_POST['submit'])) {
             if ( !isset($_POST['soilweb_nonce_field']) || !wp_verify_nonce($_POST['soilweb_nonce_field'],'soilweb_nonce_check') ) {
                 print 'Sorry, your nonce did not verify.';
                 exit;
             }
         }
-        
+
         soilweb_tabs();
         soilweb_enqueue_style_1();
-    
+
         if(isset($_REQUEST['ecosystem_to_add']) && $_REQUEST['ecosystem_to_add'] != '') {
             $tempText = $_REQUEST['ecosystem_to_add'];
             $tempArray = get_option('soilweb_ecosystems');
@@ -1355,14 +1355,14 @@
             unset($tempArray[$tempText]);
             update_option('soilweb_courses', $tempArray);
         }
-        
+
         include 'soilweb-instruction-maker.php';
     }
-    
+
     function soilweb_instructions_page() {
         add_menu_page( 'SOILx Instructions and Options', 'SOILx', 'manage_options', 'soilweb-instruction-page', 'soilweb_instructions_initializer' );
     }
-    
+
     add_action( 'admin_menu', 'soilweb_instructions_page' );
-        
+
 ?>
